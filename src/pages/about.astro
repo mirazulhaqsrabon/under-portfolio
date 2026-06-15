@@ -1,0 +1,734 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Sidebar from '../components/ui/Sidebar.astro';
+import Footer from '../components/ui/Footer.astro';
+
+const tags = [
+  'Backend Development', 'Api Design', 'System Design', 'Database Management','Authentication','Problem Solving',
+  'Debugging',  'Vibe Coding', 'Microservices', 
+];
+
+const books = [
+  {
+    title: 'New Morning Mercies',
+    author: 'Paul David Tripp',
+    image: '/books/new-morning-mercies.jpg',
+    preorder: null,
+  },
+  {
+    title: 'Leonardo da Vinci',
+    author: 'Walter Isaacson',
+    image: '/books/leonardo-cover.jpg',
+    preorder: null,
+  },
+  {
+    title: 'Sentient Design',
+    author: 'Josh Clark & Veronika Kindred',
+    image: '/books/sentient-design-cover.jpg',
+    preorder: null,
+  },
+];
+
+const musicArtists = [
+  { id: 'brandon-lake',  term: 'Brandon Lake' },
+  { id: 'snarky-puppy',  term: 'Snarky Puppy' },
+  { id: 'jacob-collier', term: 'Jacob Collier' },
+  { id: 'rawayana',      term: 'Rawayana' },
+  { id: 'raveena',       term: 'Raveena' },
+  { id: 'planetshakers', term: 'Planetshakers' },
+  { id: 'bob-marley',    term: 'Bob Marley' },
+  { id: 'anderson-paak', term: 'Anderson Paak' },
+  { id: 'tom-misch',     term: 'Tom Misch' },
+  { id: 'vulfpeck',      term: 'Vulfpeck' },
+  { id: 'fkj',           term: 'FKJ' },
+  { id: 'jazz-vibes',    term: 'Jazz Vibes' },
+];
+const podcasts = [
+  'Lex Fridman Podcast',
+  'The Changelog',
+  'Software Engineering Daily',
+  'Darknet Diaries',
+  'Syntax Podcast',
+  'Backend Engineering Show',
+  'The InfoQ Podcast',
+  'CodeNewbie'
+];
+
+---
+
+<Layout
+  title="About | Jonathan Ruiz"
+  description="Learn about Jonathan Ruiz, design leader, educator at BrainStation, co-leader of Friends of Figma Miami, and Sr. Product Design Manager at Docusign."
+>
+  <Sidebar currentPath={Astro.url.pathname} />
+
+  <div class="content-area pt-14 md:pt-0">
+    <main id="main-content">
+
+      <!-- ── Section A: Bio ── -->
+      <section class="section-padding">
+        <div class="section-container">
+
+          <a href="/" class="back-home">
+            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12 19-7-7 7-7"/><path d="M19 12H5"/></svg>
+            Back home
+          </a>
+
+          <div class="grid md:grid-cols-[1fr_280px] gap-12 md:gap-16 items-start">
+            <div>
+              <p class="label mb-3">About</p>
+              <h1 class="section-title mb-8" style="font-size: clamp(1.75rem, 4vw, 2.75rem); line-height: 1.1; letter-spacing: -0.02em;">
+                Backend Developer.<br />Problem Solver.<br />Continues Learners.
+              </h1>
+
+              <div class="about-bio">
+                <p>I'm a developer who builds systems, someone who focuses on the logic behind products, and believes reliable software comes from clean architecture and thoughtful engineering. With experience working on real-world applications, I focus on building scalable backend systems, APIs, and services that power modern products.
+                </p>
+                <p>I write, experiment, and continuously improve my skills because I genuinely enjoy backend development and the challenges it brings.
+                </p>
+                <p>Outside of coding, I'm someone who values consistency and growth. I enjoy learning new technologies, exploring ideas, and staying curious. Always open to connecting, whether to talk backend systems, APIs, performance, or just to say hi.
+                </p>
+              </div>
+
+              <!-- Tags -->
+              <div class="flex flex-wrap gap-2 mt-8 mb-10">
+                {tags.map((tag) => (
+                  <span
+                    class="px-2.5 py-1 text-xs rounded-md"
+                    style="background-color: var(--bg-2); color: var(--text-2); border: 1px solid var(--border);"
+                  >
+                    {tag}
+                  </span>
+                ))}
+              </div>
+
+              <!-- Leadership teaser card -->
+              <div
+                class="px-5 py-4 rounded-lg border-l-2 max-w-lg"
+                style="background-color: var(--bg-2); border-left-color: var(--accent); border-top: 1px solid var(--border); border-right: 1px solid var(--border); border-bottom: 1px solid var(--border);"
+              >
+                <p class="text-sm leading-relaxed mb-3" style="color: var(--text-2);">
+                  "I lead with servant leadership, humble confidence, and a belief that
+                  the whole is always greater than the sum of its parts."
+                </p>
+                <a href="/leadership" class="about-more-link">
+                  Read my leadership philosophy
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <path d="M5 12h14M12 5l7 7-7 7"/>
+                  </svg>
+                </a>
+              </div>
+            </div>
+
+            <!-- Right: headshot + role card -->
+            <div>
+              <div class="profile-card">
+                <img
+                  src="/JR-Headshot-Circular.png"
+                  alt="Jonathan Ruiz headshot"
+                  class="profile-headshot"
+                />
+                <div class="profile-body">
+                  <p class="profile-label">Current Role</p>
+                  <p class="profile-role">Sr. Product Design Manager</p>
+                  <p class="profile-company">Docusign · Miami, FL</p>
+                  <div class="profile-divider"></div>
+                  <a href="https://linkedin.com/in/jonaruiz" target="_blank" rel="noopener noreferrer" class="profile-link">
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10M7 17 17 7"/></svg>
+                    LinkedIn
+                  </a>
+                  <a href="mailto:jonathanruizg@me.com" class="profile-link">
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10M7 17 17 7"/></svg>
+                    Email
+                  </a>
+                  <a href="/resume" target="_blank" class="profile-link" style="border-bottom: none;">
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10M7 17 17 7"/></svg>
+                    Resume
+                  </a>
+                </div>
+              </div>
+
+              <!-- Currently card -->
+              <div class="currently-card">
+                <p class="currently-heading">Currently</p>
+                <div class="currently-item" id="weather-row">
+                  <span class="currently-key">weather</span>
+                  <span class="currently-val" id="weather-val">Loading…</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- ── Section B: Education ── -->
+      <section class="section-padding section-divider">
+        <div class="section-container">
+          <p class="label mb-8">Education</p>
+
+          <div class="edu-list">
+            <div class="edu-row">
+              <div>
+                <p class="edu-degree">Bachelor of Science, Advertising</p>
+                <p class="edu-school">Florida International University · Miami, FL</p>
+              </div>
+              <span class="edu-year">2013</span>
+            </div>
+            <div class="edu-row">
+              <div>
+                <p class="edu-degree">Associate of Science, Graphic Design</p>
+                <p class="edu-school">Broward College · Fort Lauderdale, FL</p>
+              </div>
+              <span class="edu-year">2011</span>
+            </div>
+          </div>
+
+          <p class="cert-label">Certificates</p>
+
+          <div class="cert-list">
+            <div class="cert-row">
+              <a href="https://credsverse.com/credentials/af1c1d85-4ace-4ccd-95ed-1839bd23bb48" target="_blank" rel="noopener noreferrer" class="cert-name">
+                Into Design Systems AI Conference
+                <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10M7 17 17 7"/></svg>
+              </a>
+              <span class="cert-meta">Into Design Systems · 2026</span>
+            </div>
+            <div class="cert-row">
+              <a href="https://adplist.org/certifications/91339" target="_blank" rel="noopener noreferrer" class="cert-name">
+                500 Mentorship Minutes
+                <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10M7 17 17 7"/></svg>
+              </a>
+              <span class="cert-meta">ADPList · 2023</span>
+            </div>
+            <div class="cert-row">
+              <a href="https://drive.google.com/file/d/1GVfG0otOy7nrQNAq0Uh73POA8_lUfMyd/view" target="_blank" rel="noopener noreferrer" class="cert-name">
+                JavaScript Development
+                <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10M7 17 17 7"/></svg>
+              </a>
+              <span class="cert-meta">General Assembly · 2021</span>
+            </div>
+            <div class="cert-row">
+              <a href="https://drive.google.com/file/d/1hHYjqgna-Tl_GZUH8t0ffqfqr-gjtc8P/view" target="_blank" rel="noopener noreferrer" class="cert-name">
+                Designing for Design Systems
+                <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10M7 17 17 7"/></svg>
+              </a>
+              <span class="cert-meta">Rosenfeld Media · 2020</span>
+            </div>
+            <div class="cert-row" style="border-bottom: none;">
+              <a href="https://drive.google.com/file/d/1urrOniunatjyV4IT-MfxqEkHNvGW4fkg/view" target="_blank" rel="noopener noreferrer" class="cert-name">
+                User Experience Design
+                <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10M7 17 17 7"/></svg>
+              </a>
+              <span class="cert-meta">General Assembly · 2016</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ── Section C: Currently Reading ── -->
+      <section class="section-padding section-divider">
+        <div class="section-container">
+          <p class="label mb-8">Currently Reading</p>
+
+          <div class="books-grid">
+            {books.map((book) => (
+              <div class="book-card">
+                <div class="book-cover-wrap">
+                  {book.image ? (
+                    <img
+                      src={book.image}
+                      alt={`Book cover: ${book.title} by ${book.author}`}
+                      class="book-cover"
+                      onerror="this.style.display='none';this.nextElementSibling.style.display='flex';"
+                    />
+                  ) : null}
+                  <div
+                    class="book-fallback"
+                    style={book.image ? 'display:none' : 'display:flex'}
+                  >
+                    {book.title.split(' ').slice(0, 2).map(w => w[0]).join('')}
+                  </div>
+                </div>
+                <p class="book-title">{book.title}</p>
+                <p class="book-author">{book.author}</p>
+                {book.preorder && (
+                  <span class="book-badge">{book.preorder}</span>
+                )}
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <!-- ── Section C: Music ── -->
+      <section class="section-padding section-divider">
+        <div class="section-container">
+          <p class="label mb-8">Currently Listening</p>
+
+          <div class="music-grid" id="music-grid">
+            {musicArtists.map((artist) => (
+              <div class="music-item">
+                <div class="music-art-wrap">
+                  <img
+                    id={`music-${artist.id}`}
+                    class="music-art"
+                    src=""
+                    alt={artist.term}
+                    data-artist={artist.term}
+                  />
+                  <div class="music-fallback" id={`fallback-${artist.id}`}>
+                    {artist.term.split(' ').map(w => w[0]).join('').slice(0, 2)}
+                  </div>
+                </div>
+                <p class="music-name">{artist.term}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <!-- ── Section D: Podcasts ── -->
+      <section class="section-padding section-divider">
+        <div class="section-container">
+          <p class="label mb-8">Podcasts</p>
+
+          <div class="podcasts-grid">
+            {podcasts.map((pod) => (
+              <div class="podcast-item">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" style="color: var(--text-3); flex-shrink: 0; margin-top: 2px;" aria-hidden="true">
+                  <path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"/>
+                  <path d="M19 10v2a7 7 0 0 1-14 0v-2"/>
+                  <line x1="12" x2="12" y1="19" y2="22"/>
+                </svg>
+                <span>{pod}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+    </main>
+    <Footer />
+  </div>
+</Layout>
+
+<style>
+  .about-bio {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+    max-width: 60ch;
+  }
+  .about-bio p {
+    font-size: 0.9rem;
+    line-height: 1.8;
+    color: var(--text-2);
+  }
+
+  .about-more-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.82rem;
+    font-weight: 500;
+    color: var(--accent);
+    text-decoration: none;
+    transition: gap 0.15s;
+  }
+  .about-more-link:hover { gap: 0.6rem; }
+
+  /* ── Profile card ── */
+  .profile-card {
+    background: var(--bg-2);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    overflow: hidden;
+    width: 100%;
+  }
+  .profile-headshot {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+    object-position: top;
+    border-radius: 12px 12px 0 0;
+    display: block;
+  }
+  .profile-body {
+    padding: 1.1rem 1.25rem 1.25rem;
+  }
+  .profile-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--accent);
+    margin-bottom: 0.4rem;
+  }
+  .profile-role {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--text);
+    margin-bottom: 0.2rem;
+  }
+  .profile-company {
+    font-size: 0.78rem;
+    color: var(--text-3);
+    margin-bottom: 0;
+  }
+  .profile-divider {
+    height: 1px;
+    background: var(--border);
+    margin: 1rem 0 0.25rem;
+  }
+  .profile-link {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.78rem;
+    color: var(--text-2);
+    text-decoration: none;
+    padding: 0.5rem 0;
+    border-bottom: 1px solid var(--border);
+    transition: color 0.15s;
+  }
+  .profile-link:hover { color: var(--accent); }
+
+  /* ── Currently card ── */
+  .currently-card {
+    margin-top: 0.75rem;
+    background: var(--bg-2);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1rem 1.25rem;
+  }
+  .currently-heading {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--accent);
+    margin-bottom: 0.75rem;
+  }
+  .currently-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.75rem;
+    padding: 0.3rem 0;
+  }
+  .currently-key {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.68rem;
+    color: var(--text-3);
+    flex-shrink: 0;
+  }
+  .currently-val {
+    font-size: 0.78rem;
+    color: var(--text-2);
+    text-align: right;
+    display: flex;
+    align-items: center;
+    gap: 3px;
+  }
+  .currently-val svg {
+    flex-shrink: 0;
+  }
+
+  /* ── Education ── */
+  .edu-list {
+    display: flex;
+    flex-direction: column;
+    max-width: 480px;
+  }
+  .edu-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    padding: 0.6rem 0;
+    border-bottom: 1px solid var(--border);
+  }
+  .edu-degree {
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: var(--text);
+    margin: 0 0 0.15rem;
+  }
+  .edu-school {
+    font-size: 0.72rem;
+    font-family: 'DM Mono', monospace;
+    color: var(--text-3);
+    margin: 0;
+  }
+  .edu-year {
+    font-size: 0.68rem;
+    font-family: 'DM Mono', monospace;
+    color: var(--text-3);
+    flex-shrink: 0;
+    margin-left: 1rem;
+  }
+
+  /* ── Certificates ── */
+  .cert-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.58rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--text-3);
+    margin-top: 1.5rem;
+    margin-bottom: 0.75rem;
+  }
+  .cert-list {
+    max-width: 480px;
+  }
+  .cert-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    padding: 0.35rem 0;
+    border-bottom: 1px solid var(--border);
+  }
+  .cert-name {
+    font-size: 0.78rem;
+    font-weight: 500;
+    color: var(--text);
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3rem;
+    transition: color 0.15s;
+  }
+  .cert-name:hover { color: var(--accent); }
+  .cert-meta {
+    font-size: 0.68rem;
+    font-family: 'DM Mono', monospace;
+    color: var(--text-3);
+    flex-shrink: 0;
+    margin-left: 1rem;
+  }
+
+  /* ── Books ── */
+  .books-grid {
+    display: flex;
+    gap: 2rem;
+    flex-wrap: wrap;
+  }
+  .book-card {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    width: 120px;
+  }
+  .book-cover-wrap {
+    position: relative;
+    width: 120px;
+    height: 180px;
+    border-radius: 8px;
+    overflow: hidden;
+    border: 1px solid var(--border);
+    background-color: var(--bg-3);
+  }
+  .book-cover {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+  .book-fallback {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'DM Mono', monospace;
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--text-3);
+    background-color: var(--bg-3);
+  }
+  .book-title {
+    font-size: 0.78rem;
+    font-weight: 500;
+    color: var(--text);
+    line-height: 1.4;
+  }
+  .book-author {
+    font-size: 0.68rem;
+    color: var(--text-3);
+  }
+  .book-badge {
+    display: inline-block;
+    font-size: 0.65rem;
+    font-family: 'DM Mono', monospace;
+    padding: 0.2rem 0.5rem;
+    border-radius: 4px;
+    background-color: var(--accent-light);
+    color: var(--accent);
+  }
+
+  /* ── Music ── */
+  .music-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 1.25rem;
+  }
+  @media (max-width: 768px) {
+    .music-grid { grid-template-columns: repeat(3, 1fr); }
+  }
+  @media (max-width: 480px) {
+    .music-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+  .music-item {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  .music-art-wrap {
+    position: relative;
+    aspect-ratio: 1;
+    border-radius: 8px;
+    overflow: hidden;
+    background-color: var(--bg-3);
+  }
+  .music-art {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 8px;
+    transition: transform 0.2s, box-shadow 0.2s;
+    display: block;
+  }
+  .music-art:hover {
+    transform: scale(1.03);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.18);
+  }
+  .music-fallback {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'DM Mono', monospace;
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--text-3);
+    background-color: var(--bg-3);
+  }
+  .music-name {
+    font-size: 0.72rem;
+    color: var(--text-2);
+    line-height: 1.3;
+  }
+
+  /* ── Podcasts ── */
+  .podcasts-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.75rem 2rem;
+  }
+  @media (max-width: 600px) {
+    .podcasts-grid { grid-template-columns: 1fr; }
+  }
+  .podcast-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.5rem;
+    font-size: 0.82rem;
+    color: var(--text-2);
+    line-height: 1.4;
+  }
+
+  @keyframes pulseDot {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50%       { opacity: 0.5; transform: scale(0.85); }
+  }
+</style>
+
+<script>
+  // Weather fetch — Open-Meteo, no API key required
+  (async () => {
+    const el = document.getElementById('weather-val');
+    if (!el) return;
+
+    const codeToLabel: Record<number, string> = {
+      0: 'Sunny', 1: 'Sunny', 2: 'Partly Cloudy', 3: 'Cloudy',
+      45: 'Foggy', 48: 'Foggy',
+      51: 'Rainy', 53: 'Rainy', 55: 'Rainy',
+      61: 'Rainy', 63: 'Rainy', 65: 'Rainy',
+      71: 'Snowy', 73: 'Snowy', 75: 'Snowy',
+      80: 'Showers', 81: 'Showers', 82: 'Showers',
+      95: 'Stormy',
+    };
+
+    const codeToIcon: Record<number, string> = {
+      0: 'sun', 1: 'sun',
+      2: 'cloud', 3: 'cloud',
+      45: 'fog', 48: 'fog',
+      51: 'rain', 53: 'rain', 55: 'rain',
+      61: 'rain', 63: 'rain', 65: 'rain',
+      80: 'rain', 81: 'rain', 82: 'rain',
+      71: 'snow', 73: 'snow', 75: 'snow',
+      95: 'storm',
+    };
+
+    const icons: Record<string, string> = {
+      sun: `<svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" style="color:var(--text-3);vertical-align:middle;margin-right:3px"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg>`,
+      cloud: `<svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" style="color:var(--text-3);vertical-align:middle;margin-right:3px"><path d="M17.5 19H9a7 7 0 1 1 6.71-9h1.79a4.5 4.5 0 1 1 0 9Z"/></svg>`,
+      fog: `<svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" style="color:var(--text-3);vertical-align:middle;margin-right:3px"><path d="M17.5 19H9a7 7 0 1 1 6.71-9h1.79a4.5 4.5 0 1 1 0 9Z"/><path d="M8 19h.01M12 21h.01M16 19h.01"/></svg>`,
+      rain: `<svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" style="color:var(--text-3);vertical-align:middle;margin-right:3px"><path d="M17.5 19H9a7 7 0 1 1 6.71-9h1.79a4.5 4.5 0 1 1 0 9Z"/><path d="M13 19v2M7 19v2M19 19v2"/></svg>`,
+      snow: `<svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" style="color:var(--text-3);vertical-align:middle;margin-right:3px"><path d="M17.5 19H9a7 7 0 1 1 6.71-9h1.79a4.5 4.5 0 1 1 0 9Z"/><path d="M8 19h.01M12 21h.01M16 19h.01"/></svg>`,
+      storm: `<svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" style="color:var(--text-3);vertical-align:middle;margin-right:3px"><path d="M17.5 19H9a7 7 0 1 1 6.71-9h1.79a4.5 4.5 0 1 1 0 9Z"/><polyline points="13 11 9 17 15 17 11 23"/></svg>`,
+      pin: `<svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" style="color:var(--text-3);vertical-align:middle;margin-right:3px"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>`,
+    };
+
+    try {
+      const res = await fetch(
+        'https://api.open-meteo.com/v1/forecast?latitude=25.7617&longitude=-80.1918&current=temperature_2m,weathercode&temperature_unit=fahrenheit&timezone=America/New_York'
+      );
+      const data = await res.json();
+      const temp = Math.round(data.current.temperature_2m);
+      const code = data.current.weathercode as number;
+      const label = codeToLabel[code] ?? 'Clear';
+      const iconKey = codeToIcon[code] ?? 'sun';
+      el.innerHTML = `${icons[iconKey]}${temp}°F · ${label} · Miami`;
+    } catch {
+      el.innerHTML = `${icons.pin}Miami, FL`;
+    }
+  })();
+
+  // Fetch iTunes album art client-side
+  const artists = document.querySelectorAll<HTMLImageElement>('[data-artist]');
+
+  artists.forEach(async (img) => {
+    const term = img.getAttribute('data-artist');
+    const id = img.id;
+    const fallbackId = 'fallback-' + id.replace('music-', '');
+    const fallback = document.getElementById(fallbackId);
+
+    if (!term) return;
+
+    try {
+      const res = await fetch(
+        `https://itunes.apple.com/search?term=${encodeURIComponent(term)}&entity=album&limit=1`
+      );
+      const data = await res.json();
+      const artwork = data?.results?.[0]?.artworkUrl100;
+
+      if (artwork) {
+        const hires = artwork.replace('100x100', '400x400');
+        img.src = hires;
+        img.onload = () => {
+          if (fallback) fallback.style.display = 'none';
+        };
+        img.onerror = () => {
+          img.style.display = 'none';
+        };
+      } else {
+        img.style.display = 'none';
+      }
+    } catch {
+      img.style.display = 'none';
+    }
+  });
+</script>

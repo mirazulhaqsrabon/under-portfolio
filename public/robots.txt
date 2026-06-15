@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://www.jonathanruiz.net/sitemap-index.xml

@@ -1,0 +1,32 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Sidebar from '../components/ui/Sidebar.astro';
+import Footer from '../components/ui/Footer.astro';
+import Hero from '../components/sections/Hero.astro';
+import AboutPreview from '../components/sections/AboutPreview.astro';
+import Work from '../components/sections/Work.astro';
+import Community from '../components/sections/Community.astro';
+import VibeCoding from '../components/sections/VibeCoding.astro';
+import ChatWidget from '../components/chat/ChatWidget.tsx';
+---
+
+<Layout
+  title="Jonathan Ruiz | Sr. Product Design Manager"
+  description="Sr. Product Design Manager at Docusign leading Ink Design System. Educator, community builder, and design leader based in Miami, FL."
+  showJsonLd={true}
+>
+  <Sidebar currentPath={Astro.url.pathname} />
+
+  <div class="content-area pt-14 md:pt-0">
+    <main id="main-content">
+      <Hero />
+      <AboutPreview />
+      <Work />
+      <Community />
+      <VibeCoding />
+    </main>
+    <Footer />
+  </div>
+
+  <ChatWidget client:only="react" />
+</Layout>

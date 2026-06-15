@@ -1,0 +1,131 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Sidebar from '../../components/ui/Sidebar.astro';
+import Footer from '../../components/ui/Footer.astro';
+
+const caseStudies = [
+  {
+    number: '01',
+    company: 'Docusign Ink Design System',
+    subtitle: 'Design Systems · Sr. Design Manager',
+    year: '2024 – Present',
+    tag: 'Systems, Management',
+    href: '/work/ink',
+  },
+  {
+    number: '02',
+    company: 'Docusign Mobile Apps',
+    subtitle: 'Mobile App Design · Lead Product Designer',
+    year: '2022 – 2024',
+    tag: 'Mobile, UX, Management',
+    href: '/work/mobile-apps',
+  },
+  {
+    number: '03',
+    company: 'Glint',
+    subtitle: 'UI/UX · Employee Engagement',
+    year: '2017 – 2019',
+    tag: 'Product',
+    href: '/work/glint',
+  },
+  {
+    number: '04',
+    company: 'Shazam TV Experience',
+    subtitle: 'UI/UX · Visual Design · Mobile',
+    year: '2015 – 2017',
+    tag: 'Mobile',
+    href: '/work/shazam-tv',
+  },
+];
+---
+
+<Layout
+  title="Work — Jonathan Ruiz"
+  description="Case studies by Jonathan Ruiz spanning Docusign Ink Design System, Glint, and Shazam."
+>
+  <Sidebar currentPath={Astro.url.pathname} />
+
+  <div class="content-area pt-14 md:pt-0">
+    <main id="main-content">
+      <section class="section-padding">
+        <div class="section-container">
+
+          <a href="/" class="back-home">
+            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12 19-7-7 7-7"/><path d="M19 12H5"/></svg>
+            Back home
+          </a>
+
+          <p class="label mb-3">Selected Work</p>
+          <h1 class="section-title mb-12" style="font-size: clamp(1.75rem, 4vw, 2.75rem); line-height: 1.1; letter-spacing: -0.02em;">
+            Case Studies
+          </h1>
+
+          <div class="divide-y" style="border-color: var(--border);">
+            {caseStudies.map((item) => (
+              <div class="work-item">
+                <a
+                  href={item.href}
+                  class="group flex items-center gap-6 py-5 transition-colors duration-150 hover:no-underline"
+                >
+                  <span
+                    class="w-10 flex-shrink-0 text-sm tabular-nums"
+                    style="font-family: 'DM Mono', monospace; color: var(--text-3);"
+                  >
+                    {item.number}
+                  </span>
+
+                  <div class="flex-1 min-w-0">
+                    <span class="block text-base font-medium group-hover:text-accent transition-colors" style="color: var(--text);">
+                      {item.company}<span class="coming-badge">Coming soon</span>
+                    </span>
+                    <span class="block text-xs mt-0.5" style="color: var(--text-3);">
+                      {item.subtitle}
+                    </span>
+                    <span class="block mt-1" style="font-family: 'DM Mono', monospace; font-size: 0.65rem; color: var(--text-3);">
+                      {item.year}
+                    </span>
+                  </div>
+
+                  <div class="hidden sm:block flex-shrink-0">
+                    <span class="px-2 py-0.5 text-xs rounded" style="background-color: var(--bg-2); color: var(--text-3); border: 1px solid var(--border);">
+                      {item.tag}
+                    </span>
+                  </div>
+
+                  <svg
+                    class="w-4 h-4 flex-shrink-0 opacity-0 group-hover:opacity-100 -translate-y-0.5 group-hover:translate-x-0.5 group-hover:-translate-y-1 transition-all duration-150"
+                    viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"
+                    style="color: var(--accent);"
+                  >
+                    <path d="M7 7h10v10M7 17 17 7"/>
+                  </svg>
+                </a>
+              </div>
+            ))}
+          </div>
+
+        </div>
+      </section>
+    </main>
+    <Footer />
+  </div>
+</Layout>
+
+<style>
+  .work-item { position: relative; }
+
+  .coming-badge {
+    font-size: 0.58rem;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--text-3);
+    border: 1px solid var(--border);
+    padding: 0.15rem 0.5rem;
+    border-radius: 100px;
+    font-family: 'DM Mono', monospace;
+    vertical-align: middle;
+    margin-left: 0.5rem;
+    white-space: nowrap;
+  }
+</style>

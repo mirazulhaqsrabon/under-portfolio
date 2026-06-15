@@ -1,0 +1,290 @@
+/* ─── Google Fonts ─────────────────────────────────────────────────────────── */
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300;1,9..40,400&family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ─── Design tokens ─────────────────────────────────────────────────────────── */
+@layer base {
+  :root {
+    --bg: #F8F8F6;
+    --bg-2: #EFEFEC;
+    --bg-3: #E5E5E1;
+    --text: #0A0A08;
+    --text-2: #3D3D3A;
+    --text-3: #767672;
+    --accent: #FF5F40;
+    --accent-hover: #E54E30;
+    --accent-light: #FAE8E4;
+    --on-accent: #0A0A08;
+    --border: #E0E0DC;
+    --color-online: #22C55E;
+    --accent-slate: #435663;
+  }
+
+  [data-theme="dark"] {
+    --bg: #0A0A08;
+    --bg-2: #141412;
+    --bg-3: #1C1C1A;
+    --text: #F0F0EC;
+    --text-2: #AAAAA6;
+    --text-3: #717170;
+    --accent: #FF5F40;
+    --accent-hover: #FF7A5C;
+    --accent-light: #1F0E08;
+    --on-accent: #0A0A08;
+    --border: #222220;
+    --color-online: #22C55E;
+    --accent-slate: #7BA3B8;
+  }
+
+  html {
+    @apply scroll-smooth;
+    background-color: var(--bg);
+    color: var(--text);
+    font-family: 'DM Sans', system-ui, sans-serif;
+  }
+
+  body {
+    @apply antialiased;
+    background-color: var(--bg);
+    color: var(--text);
+  }
+
+  ::selection {
+    background-color: var(--accent);
+    color: var(--on-accent);
+  }
+
+  ::-webkit-scrollbar { width: 5px; }
+  ::-webkit-scrollbar-track { background: var(--bg); }
+  ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+  ::-webkit-scrollbar-thumb:hover { background: var(--text-3); }
+}
+
+/* ─── Focus styles ──────────────────────────────────────────────────────────── */
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+:focus:not(:focus-visible) {
+  outline: none;
+}
+
+/* ─── Skip nav ──────────────────────────────────────────────────────────────── */
+.skip-nav {
+  position: absolute;
+  top: -100%;
+  left: 1rem;
+  background: var(--accent);
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 0 0 8px 8px;
+  font-size: 0.82rem;
+  font-weight: 500;
+  text-decoration: none;
+  z-index: 9999;
+  transition: top 0.2s;
+}
+.skip-nav:focus {
+  top: 0;
+}
+
+/* ─── Smooth theme transitions ──────────────────────────────────────────────── */
+*, *::before, *::after {
+  transition: background-color 0.3s ease,
+              border-color 0.3s ease,
+              color 0.3s ease;
+}
+
+button, a {
+  transition: opacity 0.2s ease,
+              transform 0.2s ease,
+              border-color 0.2s ease,
+              color 0.2s ease;
+}
+
+/* ─── Components ────────────────────────────────────────────────────────────── */
+@layer components {
+  /* Layout */
+  .content-area {
+    @apply ml-0 md:ml-[240px];
+  }
+  .section-container {
+    @apply mx-auto max-w-content px-8 md:px-12;
+  }
+  .section-padding {
+    @apply py-20 md:py-28;
+  }
+
+  /* Labels */
+  .label {
+    font-family: 'DM Mono', monospace;
+    @apply text-[11px] font-normal tracking-[0.12em] uppercase;
+    color: var(--accent);
+  }
+
+  /* Text */
+  .section-title {
+    font-family: 'DM Sans', sans-serif;
+    @apply font-semibold leading-tight;
+    color: var(--text);
+  }
+  .body-text {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 1rem;
+    font-weight: 300;
+    line-height: 1.8;
+    color: var(--text-2);
+  }
+
+  /* Divider */
+  .section-divider {
+    @apply border-t;
+    border-color: var(--border);
+  }
+
+  /* Card */
+  .card {
+    background-color: var(--bg-2);
+    border: 1px solid var(--border);
+    @apply rounded-xl p-6 transition-all duration-200;
+  }
+  .card:hover {
+    border-color: var(--accent);
+  }
+
+  /* Buttons */
+  .btn-primary {
+    font-family: 'DM Sans', sans-serif;
+    background-color: var(--accent);
+    color: var(--on-accent);
+    @apply inline-flex items-center gap-2 px-5 py-2.5 text-sm font-medium rounded-lg transition-all duration-200;
+  }
+  .btn-primary:hover {
+    background-color: var(--accent-hover);
+  }
+
+  .btn-ghost {
+    font-family: 'DM Sans', sans-serif;
+    color: var(--text);
+    border: 1px solid var(--border);
+    @apply inline-flex items-center gap-2 px-5 py-2.5 text-sm font-medium rounded-lg transition-all duration-200;
+  }
+  .btn-ghost:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+  }
+
+  /* Sidebar nav link */
+  .nav-link {
+    font-family: 'DM Sans', sans-serif;
+    @apply flex items-center gap-3 px-3 py-2 rounded-lg text-sm font-medium transition-all duration-150;
+    color: var(--text-2);
+  }
+  .nav-link:hover {
+    background-color: var(--accent-light);
+    color: var(--accent);
+  }
+  .nav-link.active {
+    background-color: var(--accent-light);
+    color: var(--accent);
+  }
+
+  /* Back home link */
+  .back-home {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.72rem;
+    color: var(--text-3);
+    text-decoration: none;
+    margin-bottom: 2rem;
+    transition: color 0.15s;
+  }
+  .back-home:hover {
+    color: var(--text);
+  }
+
+  /* Logo theme switching */
+  .logo-dark { display: none; }
+  .logo-light { display: block; }
+  [data-theme="dark"] .logo-dark { display: block; }
+  [data-theme="dark"] .logo-light { display: none; }
+
+  .logo-img {
+    width: 32px;
+    height: auto;
+    flex-shrink: 0;
+  }
+
+  .logo-link {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    text-decoration: none;
+    color: inherit;
+    transition: opacity 0.2s;
+  }
+  .logo-link:hover { opacity: 0.75; }
+
+  .logo-text {
+    display: flex;
+    flex-direction: column;
+    gap: 0.15rem;
+  }
+
+  .logo-name {
+    font-size: 0.875rem;
+    font-weight: 600;
+    line-height: 1.2;
+    color: var(--text);
+  }
+
+  .logo-title {
+    font-size: 0.72rem;
+    color: var(--text-3);
+    line-height: 1.3;
+  }
+
+  /* Icon button */
+  .icon-btn {
+    @apply w-8 h-8 rounded-lg flex items-center justify-center transition-all duration-150;
+    color: var(--text-3);
+    border: 1px solid var(--border);
+  }
+  .icon-btn:hover {
+    color: var(--accent);
+    border-color: var(--accent);
+  }
+}
+
+/* ─── Shared keyframes ───────────────────────────────────────────────────────── */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(12px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ─── Chat widget keyframes ─────────────────────────────────────────────────── */
+@keyframes dotBounce {
+  0%, 80%, 100% { transform: translateY(0); opacity: 0.45; }
+  40%           { transform: translateY(-4px); opacity: 1; }
+}
+@keyframes pingDot {
+  75%, 100% { transform: scale(2.2); opacity: 0; }
+}
+@keyframes chatAppear {
+  from { opacity: 0; transform: scale(0.94) translateY(0.5rem); }
+  to   { opacity: 1; transform: scale(1)    translateY(0); }
+}
+
+/* ─── Utilities ─────────────────────────────────────────────────────────────── */
+@layer utilities {
+  .text-balance { text-wrap: balance; }
+  .bg-surface { background-color: var(--bg-2); }
+  .text-accent { color: var(--accent); }
+  .border-subtle { border-color: var(--border); }
+}

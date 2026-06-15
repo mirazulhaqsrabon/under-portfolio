@@ -1,0 +1,267 @@
+---
+---
+
+<section id="hero" class="min-h-screen flex items-center section-padding pt-20 md:pt-0" style="position: relative;">
+  <!-- WebGL dot grid -->
+  <canvas id="webgl-canvas" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0;"></canvas>
+
+  <div class="section-container w-full" style="position: relative; z-index: 2;">
+    <!-- Headshot: above h1, left aligned -->
+    <img
+      src="/JR-Headshot-Circular.png"
+      alt="Jonathan Ruiz, Sr. Product Design Manager"
+      class="hero-photo animate-slide-up"
+      style="opacity: 0; animation-fill-mode: forwards;"
+    />
+
+    <!-- Headline -->
+    <h1 class="hero-h1 text-balance animate-slide-up" style="opacity: 0; animation-fill-mode: forwards;">
+      Building with <span style="color: var(--accent);">purpose.</span><br />
+      Engineering with excellence.
+    </h1>
+
+    <!-- Bio -->
+    <p
+      class="body-text max-w-prose text-base mb-10 animate-slide-up"
+      style="animation-delay: 0.1s; opacity: 0; animation-fill-mode: forwards;"
+    >
+      I'm Mirazul Haq Srabon, a backend engineer specializing in scalable architectures, performance, and building systems that drive real-world impact.
+    </p>
+
+    <!-- CTAs -->
+    <div
+      class="flex flex-wrap gap-3 mb-12 animate-slide-up"
+      style="animation-delay: 0.2s; opacity: 0; animation-fill-mode: forwards;"
+    >
+      <a href="#work" class="btn-primary">
+        View my work
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M5 12h14M12 5l7 7-7 7"/>
+        </svg>
+      </a>
+      <a href="mailto:jonathanruizg@me.com" class="btn-ghost">Say hello</a>
+    </div>
+
+    <!-- Scripture card -->
+    <div
+      class="max-w-prose animate-slide-up"
+      style="animation-delay: 0.3s; opacity: 0; animation-fill-mode: forwards;"
+    >
+      <div
+        class="px-5 py-4 rounded-lg border-l-2"
+        style="background-color: var(--bg-2); border-left-color: var(--accent); border-top: 1px solid var(--border); border-right: 1px solid var(--border); border-bottom: 1px solid var(--border);"
+      >
+        <p class="text-sm leading-relaxed italic mb-1.5" style="color: var(--text-2);">
+          "Any fool can write code that a computer can understand. Good programmers write code that humans can understand."
+        </p>
+        <p class="text-xs font-medium" style="font-family: 'DM Mono', monospace; color: var(--accent);">
+          — Martin Fowler
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .hero-photo {
+    display: block;
+    width: 72px;
+    height: 72px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid var(--border);
+    margin-bottom: 1.75rem;
+  }
+
+  .hero-h1 {
+    font-size: clamp(2.8rem, 5vw, 4.5rem);
+    font-weight: 700;
+    line-height: 1.05;
+    letter-spacing: -0.04em;
+    color: var(--text);
+    margin-bottom: 1rem;
+  }
+</style>
+
+<script is:inline>
+(function() {
+  const canvas = document.getElementById('webgl-canvas');
+  if (!canvas) return;
+
+  const gl = canvas.getContext('webgl') || canvas.getContext('experimental-webgl');
+  if (!gl) return;
+
+  const vsSource = `
+    precision mediump float;
+    attribute vec2 a_basePos;
+    uniform vec2 u_mouse;
+    uniform vec2 u_resolution;
+    uniform float u_time;
+    uniform float u_isDark;
+    varying float v_influence;
+
+    void main() {
+      vec2 mouseNorm = u_mouse / u_resolution;
+
+      float dist = distance(a_basePos, mouseNorm);
+      float influence = smoothstep(0.3, 0.0, dist);
+
+      float angle = atan(
+        a_basePos.y - mouseNorm.y,
+        a_basePos.x - mouseNorm.x
+      );
+      float push = influence * 0.05;
+      float ripple = sin(dist * 15.0 - u_time * 2.5)
+                     * 0.015 * influence;
+
+      vec2 pos = a_basePos;
+      pos.x += cos(angle) * (push + ripple);
+      pos.y += sin(angle) * (push + ripple);
+
+      vec2 clip = pos * 2.0 - 1.0;
+      clip.y *= -1.0;
+
+      gl_Position = vec4(clip, 0.0, 1.0);
+      float sizeMod = mix(3.5, 1.5, u_isDark);
+      gl_PointSize = sizeMod + mix(0.0, 3.0, influence);
+      v_influence = influence;
+    }
+  `;
+
+  const fsSource = `
+    precision mediump float;
+    varying float v_influence;
+    uniform float u_isDark;
+
+    void main() {
+      vec2 coord = gl_PointCoord - 0.5;
+      if (length(coord) > 0.5) discard;
+
+      float r = length(coord);
+      float alpha = (1.0 - r * 2.0);
+      float baseAlpha = mix(0.7, 0.18, u_isDark);
+      alpha *= mix(baseAlpha, 0.95, v_influence);
+
+      vec3 baseDark  = vec3(0.40, 0.40, 0.38);
+      vec3 baseLight = vec3(0.18, 0.24, 0.28);
+      vec3 accent    = vec3(1.0, 0.373, 0.251);
+
+      vec3 base  = mix(baseLight, baseDark, u_isDark);
+      vec3 color = mix(base, accent, v_influence * 0.9);
+
+      gl_FragColor = vec4(color, alpha);
+    }
+  `;
+
+  function makeShader(type, src) {
+    const s = gl.createShader(type);
+    gl.shaderSource(s, src);
+    gl.compileShader(s);
+    if (!gl.getShaderParameter(s, gl.COMPILE_STATUS)) {
+      console.error('Shader error:', gl.getShaderInfoLog(s));
+      return null;
+    }
+    return s;
+  }
+
+  const vs = makeShader(gl.VERTEX_SHADER, vsSource);
+  const fs = makeShader(gl.FRAGMENT_SHADER, fsSource);
+  if (!vs || !fs) return;
+
+  const prog = gl.createProgram();
+  gl.attachShader(prog, vs);
+  gl.attachShader(prog, fs);
+  gl.linkProgram(prog);
+
+  if (!gl.getProgramParameter(prog, gl.LINK_STATUS)) {
+    console.error('Program error:', gl.getProgramInfoLog(prog));
+    return;
+  }
+
+  gl.useProgram(prog);
+
+  const basePosLoc = gl.getAttribLocation(prog, 'a_basePos');
+  const mouseLoc   = gl.getUniformLocation(prog, 'u_mouse');
+  const resLoc     = gl.getUniformLocation(prog, 'u_resolution');
+  const timeLoc    = gl.getUniformLocation(prog, 'u_time');
+  const darkLoc    = gl.getUniformLocation(prog, 'u_isDark');
+
+  let cols, rows, count;
+  const buf = gl.createBuffer();
+
+  function buildGrid() {
+    const spacing = 32;
+    cols = Math.ceil(canvas.width / spacing);
+    rows = Math.ceil(canvas.height / spacing);
+    count = cols * rows;
+    const positions = new Float32Array(count * 2);
+
+    for (let r = 0; r < rows; r++) {
+      for (let c = 0; c < cols; c++) {
+        const i = (r * cols + c) * 2;
+        positions[i]     = (c + 0.5) / cols;
+        positions[i + 1] = (r + 0.5) / rows;
+      }
+    }
+
+    gl.bindBuffer(gl.ARRAY_BUFFER, buf);
+    gl.bufferData(gl.ARRAY_BUFFER, positions, gl.STATIC_DRAW);
+    gl.enableVertexAttribArray(basePosLoc);
+    gl.vertexAttribPointer(basePosLoc, 2, gl.FLOAT, false, 0, 0);
+  }
+
+  function resize() {
+    const rect = canvas.getBoundingClientRect();
+    canvas.width  = rect.width;
+    canvas.height = rect.height;
+    gl.viewport(0, 0, canvas.width, canvas.height);
+    buildGrid();
+  }
+
+  let mouse  = { x: -9999, y: -9999 };
+  let smooth = { x: -9999, y: -9999 };
+
+  const hero = canvas.parentElement;
+  hero.addEventListener('mousemove', function(e) {
+    const rect = canvas.getBoundingClientRect();
+    mouse.x = e.clientX - rect.left;
+    mouse.y = e.clientY - rect.top;
+  });
+
+  hero.addEventListener('mouseleave', function() {
+    mouse.x = -9999;
+    mouse.y = -9999;
+  });
+
+  resize();
+  setTimeout(resize, 150);
+  window.addEventListener('resize', resize);
+
+  gl.enable(gl.BLEND);
+  gl.blendFunc(gl.SRC_ALPHA, gl.ONE_MINUS_SRC_ALPHA);
+
+  const start = Date.now();
+
+  function render() {
+    const t = (Date.now() - start) / 1000;
+
+    smooth.x += (mouse.x - smooth.x) * 0.1;
+    smooth.y += (mouse.y - smooth.y) * 0.1;
+
+    const isDark = document.documentElement.getAttribute('data-theme') === 'dark' ? 1.0 : 0.0;
+
+    gl.clearColor(0, 0, 0, 0);
+    gl.clear(gl.COLOR_BUFFER_BIT);
+
+    gl.uniform2f(mouseLoc, smooth.x, smooth.y);
+    gl.uniform2f(resLoc, canvas.width, canvas.height);
+    gl.uniform1f(timeLoc, t);
+    gl.uniform1f(darkLoc, isDark);
+
+    gl.drawArrays(gl.POINTS, 0, count);
+    requestAnimationFrame(render);
+  }
+
+  render();
+})();
+</script>

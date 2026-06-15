@@ -1,0 +1,118 @@
+---
+const tags = ['Leadership', 'Mentorship', 'Strategy','AI × Design', 'Vibe Coding', 'Interaction Design', 'Design Systems','Accessibility' ];
+
+const reading = [
+  'UX for AI: A Framework for Designing AI-Driven Products' - Greg Nudelman,
+  '"Leonardo da Vinci" — Walter Isaacson',
+  'Principles of Building AI Agents' — Sam Bhagwat',
+  'Pre-ordered: "Sentient Design" — Josh Clark & Veronika Kindred, Rosenfeld Media (June 2026)',
+];
+
+const podcasts = [
+  'The Ramsey Show', 'Dwarkesh Podcast', 'Diary of a CEO', 'EntreLeadership',
+  'Stuff You Should Know', 'Design System Office Hours', 'Dive Club',
+  'Economics of Everyday Things', 'Lex Fridman', 'Joe Rogan Experience',
+];
+
+const music = [
+  'Jazz Vibes', 'Snarky Puppy', 'Jacob Collier', 'Raveena', 'Planetshakers',
+  'MuteMath', 'Anderson .Paak', 'Tom Misch', 'Vulfpeck', 'FKJ',
+];
+---
+
+<section id="about" class="section-padding section-divider">
+  <div class="section-container">
+    <p class="label mb-6">About</p>
+
+    <div class="grid md:grid-cols-2 gap-12 md:gap-16 items-start">
+      <!-- Left: philosophy -->
+      <div>
+        <h2 class="section-title text-headline mb-5">
+          I don't just build features. I build the systems that power them.
+        </h2>
+        <p class="body-text max-w-prose mb-6">
+      With experience working on scalable products, I’ve contributed to backend systems used by real users. I focus on building reliable APIs, improving performance, and solving practical engineering problems.
+My approach is simple: write clean, maintainable code, think in systems, and continuously learn and improve. Recently, I’ve been exploring the intersection of backend engineering and AI, building tools and experiments to understand what’s next.    
+    </p>
+
+        <div class="flex flex-wrap gap-2 mb-8">
+          {tags.map((tag) => (
+            <span
+              class="px-2.5 py-1 text-xs rounded-md"
+              style="background-color: var(--bg-2); color: var(--text-2); border: 1px solid var(--border);"
+            >
+              {tag}
+            </span>
+          ))}
+        </div>
+
+        <div class="flex flex-wrap gap-3">
+          <a href="/resume.pdf" target="_blank" rel="noopener" class="btn-ghost">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/>
+            </svg>
+            Resume
+          </a>
+          <a href="https://linkedin.com/in/jonaruiz" target="_blank" rel="noopener" class="btn-ghost">LinkedIn</a>
+        </div>
+      </div>
+
+      <!-- Right: card with headshot + currently -->
+      <div>
+        <div class="card overflow-hidden p-0">
+          <!-- Headshot -->
+          <div class="w-full" style="aspect-ratio: 1 / 1; overflow: hidden;">
+            <img
+              src="/JR-Headshot-Circular.png"
+              alt="Jonathan Ruiz"
+              class="headshot-img"
+              style="width: 100%; height: 100%; object-fit: cover; filter: grayscale(20%); transition: filter 0.3s ease;"
+            />
+          </div>
+
+          <!-- Role info -->
+          <div class="px-6 py-4" style="border-bottom: 1px solid var(--border);">
+            <div class="flex items-center gap-2 mb-2">
+              <span class="w-1.5 h-1.5 rounded-full flex-shrink-0" style="background-color: var(--color-online); animation: pulseDot 2s ease-in-out infinite;"></span>
+              <span class="label text-[10px]">Current role</span>
+            </div>
+            <p class="text-sm font-semibold mb-0.5" style="color: var(--text);">Sr. Product Design Manager</p>
+            <p class="text-sm" style="color: var(--text-3);">Docusign · Miami, FL</p>
+          </div>
+
+          <!-- Currently: Reading -->
+          <div class="px-6 py-4" style="border-bottom: 1px solid var(--border);">
+            <p class="label text-[10px] mb-3">Reading</p>
+            <ul class="space-y-1.5">
+              {reading.map((item) => (
+                <li class="text-xs leading-snug" style="color: var(--text-2);">{item}</li>
+              ))}
+            </ul>
+          </div>
+
+          <!-- Currently: Podcasts -->
+          <div class="px-6 py-4" style="border-bottom: 1px solid var(--border);">
+            <p class="label text-[10px] mb-3">Podcasts</p>
+            <p class="text-xs leading-relaxed" style="color: var(--text-2);">
+              {podcasts.join(', ')}
+            </p>
+          </div>
+
+          <!-- Currently: Music -->
+          <div class="px-6 py-4">
+            <p class="label text-[10px] mb-3">Music</p>
+            <p class="text-xs leading-relaxed" style="color: var(--text-2);">
+              {music.join(', ')}
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .headshot-img:hover {
+    filter: grayscale(0%) !important;
+  }
+</style>
